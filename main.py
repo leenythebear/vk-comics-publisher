@@ -19,3 +19,10 @@ def get_random_comics(num):
     response = requests.get(comics_url)
     response.raise_for_status()
     return response.json()
+
+
+def save_comics(url, comics_filename):
+    response = requests.get(url)
+    response.raise_for_status()
+    with open(f"{comics_filename}", "wb") as file:
+        file.write(response.content)
