@@ -3,9 +3,15 @@ from urllib.parse import urlparse
 
 import requests
 
+
 def get_comics_extension(url):
     parsed_link = urlparse(url)
     return os.path.splitext(parsed_link.path)[1]
+
+
+def get_comics_filename(extension, filename):
+    comics_filename = f'{filename}{extension}'
+    return comics_filename
 
 
 def get_random_comics(num):
