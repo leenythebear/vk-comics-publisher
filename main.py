@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 from urllib.parse import urlparse
 
 import requests
@@ -26,6 +27,19 @@ def save_comics(url, comics_filename):
     response.raise_for_status()
     with open(f"{comics_filename}", "wb") as file:
         file.write(response.content)
+
+
+def get_url_for_upload():
+    group_id = '215364307'
+    load_dotenv()
+    token = os.getenv('ACCESS_TOKEN')
+    url = 'https://api.vk.com/method/photos.getWallUploadServer'
+    params = {'access_token': token, 'v': '5.131', "group_id": group_id}
+    response = requests.get(url, params=params)
+    response.raise_for_status()
+    return response.json()['response']['upload_url']
+
+
 
 
 if __name__ == "__main__":
