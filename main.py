@@ -31,6 +31,7 @@ def save_comics(url, comics_filename):
 if __name__ == "__main__":
     random_comics = get_random_comics(614)
     random_comics_url = random_comics['img']
+    random_comics_comment = random_comics['alt']
     filename = random_comics['title']
     extension = get_comics_extension(random_comics_url)
     comics_filename = get_comics_filename(extension, filename)
