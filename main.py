@@ -26,3 +26,12 @@ def save_comics(url, comics_filename):
     response.raise_for_status()
     with open(f"{comics_filename}", "wb") as file:
         file.write(response.content)
+
+
+if __name__ == "__main__":
+    random_comics = get_random_comics(614)
+    random_comics_url = random_comics['img']
+    filename = random_comics['title']
+    extension = get_comics_extension(random_comics_url)
+    comics_filename = get_comics_filename(extension, filename)
+    save_comics(random_comics_url, comics_filename)
