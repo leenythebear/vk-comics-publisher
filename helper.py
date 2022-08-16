@@ -1,14 +1,26 @@
-from random import randint
+import os
+from urllib.parse import urlparse
 
 import requests
 
 
-def get_random_comics_num():
-    url = 'https://xkcd.com/info.0.json'
+def get_comics_extension(url):
+    parsed_link = urlparse(url)
+    return os.path.splitext(parsed_link.path)[1]
+
+
+def get_comics_filename(extension, filename):
+    comics_filename = f'{filename}{extension}'
+    return comics_filename
+
+
+def save_comic(url, comics_filename):
     response = requests.get(url)
     response.raise_for_status()
-    total_comics = int(response.json()['num'])
-    random_comics_num = randint(0, total_comics)
-    return random_comics_num
+    with open(f"{comics_filename}", "wb") as file:
+        file.write(response.content)
 
+
+def del_used_comic(filename):
+    os.remove(filename)
 
