@@ -1,21 +1,20 @@
 import os
+
 from dotenv import load_dotenv
 
-from xkcd import get_random_comic_num, get_random_comic
-
 from helper import (
+    del_used_comic,
     get_comics_extension,
     get_comics_filename,
     save_comic,
-    del_used_comic,
 )
-
 from vk_api import (
     get_url_for_upload,
-    upload_comic_to_server,
-    upload_comic_in_album,
     publish_comic,
+    upload_comic_in_album,
+    upload_comic_to_server,
 )
+from xkcd import get_random_comic, get_random_comic_num
 
 
 if __name__ == "__main__":
