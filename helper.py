@@ -10,7 +10,7 @@ def get_comics_extension(url):
 
 
 def get_comics_filename(extension, filename):
-    comics_filename = f'{filename}{extension}'
+    comics_filename = f"{filename}{extension}"
     return comics_filename
 
 
@@ -23,4 +23,3 @@ def save_comic(url, comics_filename):
 
 def del_used_comic(filename):
     os.remove(filename)
-
