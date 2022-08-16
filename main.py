@@ -40,6 +40,25 @@ def get_url_for_upload():
     return response.json()['response']['upload_url']
 
 
+def upload_comics(filename, url_for_upload):
+    with open(filename, 'rb') as file:
+        files = {'photo': file}
+        response = requests.post(url_for_upload, files=files)
+        response.raise_for_status()
+        return response.json()
+
+
+def upload_comics_in_album(response):
+    load_dotenv()
+    token = os.getenv('ACCESS_TOKEN')
+    url = 'https://api.vk.com/method/photos.saveWallPhoto'
+    params = {'v': '5.131', 'access_token': token, 'group_id': '215364307', 'server': response['server'], 'photo': response['photo'], 'hash': response['hash']}
+    new_response = requests.post(url, params=params)
+    new_response.raise_for_status()
+    return new_response.json()
+
+def publish_comics():
+
 
 
 if __name__ == "__main__":
