@@ -57,7 +57,22 @@ def upload_comics_in_album(response):
     new_response.raise_for_status()
     return new_response.json()
 
-def publish_comics():
+
+def publish_comics(response):
+    load_dotenv()
+    token = os.getenv('ACCESS_TOKEN')
+    url = 'https://api.vk.com/method/wall.post'
+    owner_id = '-' + '215364307'
+    photo_id = response['response'][0]['id']
+    attachments = 'photo' + str(response['response'][0]['owner_id']) + '_' + str(photo_id)
+    params = {'v': '5.131', 'access_token': token,
+              'owner_id': owner_id, 'from_group': 1, 'message': 'Comics',
+              'attachments': attachments}
+    publish_response = requests.post(url, params=params)
+    publish_response.raise_for_status()
+    return publish_response
+
+
 
 
 
