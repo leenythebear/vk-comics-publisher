@@ -20,6 +20,3 @@ def save_comic(url, comics_filename):
     with open(f"{comics_filename}", "wb") as file:
         file.write(response.content)
 
-
-def del_used_comic(filename):
-    os.remove(filename)

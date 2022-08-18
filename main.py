@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv
 
 from helper import (
-    del_used_comic,
     get_comics_extension,
     get_comics_filename,
     save_comic,
@@ -39,4 +38,4 @@ if __name__ == "__main__":
         upload_server_response, token
     )
     publish_comic(upload_album_response, token, group_id, comic_comment)
-    del_used_comic(comic_filename)
+    os.remove(comic_filename)
