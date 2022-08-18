@@ -34,14 +34,9 @@ def upload_comic_in_album(response, token):
 
 def publish_comic(response, token, group_id, comment):
     url = "https://api.vk.com/method/wall.post"
-    owner_id = "-" + group_id
+    owner_id = f"-{group_id}"
     photo_id = response["response"][0]["id"]
-    attachments = (
-        "photo"
-        + str(response["response"][0]["owner_id"])
-        + "_"
-        + str(photo_id)
-    )
+    attachments = f"photo{response['response'][0]['owner_id']}_{photo_id}"
     params = {
         "v": "5.131",
         "access_token": token,
