@@ -6,10 +6,10 @@ import requests
 
 
 def get_random_comic_num():
-    url = 'https://xkcd.com/info.0.json'
+    url = "https://xkcd.com/info.0.json"
     response = requests.get(url)
     response.raise_for_status()
-    total_comics = int(response.json()['num'])
+    total_comics = int(response.json()["num"])
     random_comics_num = randint(0, total_comics)
     return random_comics_num
 
@@ -20,7 +20,7 @@ def save_comic(num):
     response = requests.get(random_comics_url)
     response.raise_for_status()
 
-    comic_url_for_download = response.json()['img']
+    comic_url_for_download = response.json()["img"]
     comic_name = response.json()["title"]
     comic_comment = response.json()["alt"]
     parsed_url = urlparse(comic_url_for_download)
@@ -33,6 +33,3 @@ def save_comic(num):
     with open(comic_filename, "wb") as file:
         file.write(download_response.content)
     return comic_filename, comic_comment
-
-
-
