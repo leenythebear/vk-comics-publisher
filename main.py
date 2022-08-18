@@ -2,18 +2,13 @@ import os
 
 from dotenv import load_dotenv
 
-from helper import (
-    get_comics_extension,
-    get_comics_filename,
-    save_comic,
-)
 from vk_api import (
     get_url_for_upload,
     publish_comic,
     upload_comic_in_album,
     upload_comic_to_server,
 )
-from xkcd import get_random_comic, get_random_comic_num
+from xkcd import get_random_comic_num, save_comic
 
 
 if __name__ == "__main__":
@@ -22,13 +17,7 @@ if __name__ == "__main__":
     token = os.getenv("VK_ACCESS_TOKEN")
 
     random_comic_num = get_random_comic_num()
-    random_comic = get_random_comic(random_comic_num)
-    comic_url = random_comic["img"]
-    comic_name = random_comic["title"]
-    comic_comment = random_comic["alt"]
-    comic_extension = get_comics_extension(comic_url)
-    comic_filename = get_comics_filename(comic_extension, comic_name)
-    save_comic(comic_url, comic_filename)
+    comic_filename, comic_comment = save_comic(random_comic_num)
 
     try:
         url_for_upload = get_url_for_upload(group_id, token)
