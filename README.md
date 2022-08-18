@@ -35,8 +35,8 @@ scope=photos,groups
 5. Полученные в предыдущем пункте переменные (access_token и group_id) необходимо записать в созданный в корне проекта файл ``.env`` следующим образом:
 
 ```
-ACCESS_TOKEN=v3.r.136791528.bb7d... 
-GROUP_ID=9926
+VK_ACCESS_TOKEN=v3.r.136791528.bb7d... 
+VK_GROUP_ID=9926
 
 ``` 
 ___

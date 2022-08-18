@@ -19,8 +19,8 @@ from xkcd import get_random_comic, get_random_comic_num
 
 if __name__ == "__main__":
     load_dotenv()
-    group_id = os.getenv("GROUP_ID")
-    token = os.getenv("ACCESS_TOKEN")
+    group_id = os.getenv("VK_GROUP_ID")
+    token = os.getenv("VK_ACCESS_TOKEN")
 
     random_comic_num = get_random_comic_num()
     random_comic = get_random_comic(random_comic_num)
