@@ -13,8 +13,8 @@ def upload_comic_to_server(filename, url_for_upload):
     with open(filename, "rb") as file:
         files = {"photo": file}
         response = requests.post(url_for_upload, files=files)
-        response.raise_for_status()
-        return response.json()
+    response.raise_for_status()
+    return response.json()
 
 
 def upload_comic_in_album(response, token):
