@@ -5,7 +5,7 @@ from urllib.parse import urlparse
 import requests
 
 
-def get_random_comic_num():
+def get_total_comics():
     url = "https://xkcd.com/info.0.json"
     response = requests.get(url)
     response.raise_for_status()
