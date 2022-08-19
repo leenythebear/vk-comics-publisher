@@ -19,9 +19,10 @@ def save_comic(num):
     response = requests.get(random_comics_url)
     response.raise_for_status()
 
-    comic_url_for_download = response.json()["img"]
-    comic_name = response.json()["title"]
-    comic_comment = response.json()["alt"]
+    comic_response = response.json()
+    comic_url_for_download = comic_response["img"]
+    comic_name = comic_response["title"]
+    comic_comment = comic_response["alt"]
     parsed_url = urlparse(comic_url_for_download)
     comic_extension = os.path.splitext(parsed_url.path)[1]
     comic_filename = f"{comic_name}{comic_extension}"
