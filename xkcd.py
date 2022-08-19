@@ -15,8 +15,7 @@ def get_random_comic_num():
 
 
 def save_comic(num):
-    random_comics_num = randint(0, num)
-    random_comics_url = f"https://xkcd.com/{random_comics_num}/info.0.json"
+    random_comics_url = f"https://xkcd.com/{num}/info.0.json"
     response = requests.get(random_comics_url)
     response.raise_for_status()
 
