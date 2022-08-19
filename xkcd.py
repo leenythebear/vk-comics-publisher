@@ -10,12 +10,12 @@ def get_random_comic_num():
     response = requests.get(url)
     response.raise_for_status()
     total_comics = int(response.json()["num"])
+    return total_comics
+
+
+def save_comic(total_comics):
     random_comics_num = randint(0, total_comics)
-    return random_comics_num
-
-
-def save_comic(num):
-    random_comics_url = f"https://xkcd.com/{num}/info.0.json"
+    random_comics_url = f"https://xkcd.com/{random_comics_num}/info.0.json"
     response = requests.get(random_comics_url)
     response.raise_for_status()
 
