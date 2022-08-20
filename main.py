@@ -21,14 +21,16 @@ if __name__ == "__main__":
 
     try:
         url_for_upload = get_url_for_upload(group_id, token)
-        upload_server_response = upload_comic_to_server(
+        photo_server, photo, photo_hash = upload_comic_to_server(
             comic_filename,
             url_for_upload,
         )
-        upload_album_response = upload_comic_in_album(
-            upload_server_response,
+        upload_owner_id, photo_id = upload_comic_in_album(
+            photo_server,
+            photo,
+            photo_hash,
             token,
         )
-        publish_comic(upload_album_response, token, group_id, comic_comment)
+        publish_comic(upload_owner_id, photo_id, token, group_id, comic_comment)
     finally:
         os.remove(comic_filename)

@@ -14,33 +14,39 @@ def upload_comic_to_server(filename, url_for_upload):
         files = {"photo": file}
         response = requests.post(url_for_upload, files=files)
     response.raise_for_status()
-    return response.json()
+    upload_response = response.json()
+    photo_server = upload_response["server"]
+    photo = upload_response["photo"]
+    photo_hash = upload_response["hash"]
+    return photo_server, photo, photo_hash
 
 
-def upload_comic_in_album(response, token):
+def upload_comic_in_album(photo_server, photo, photo_hash, token):
     url = "https://api.vk.com/method/photos.saveWallPhoto"
     params = {
         "v": "5.131",
         "access_token": token,
         "group_id": "215364307",
-        "server": response["server"],
-        "photo": response["photo"],
-        "hash": response["hash"],
+        "server": photo_server,
+        "photo": photo,
+        "hash": photo_hash,
     }
-    upload_response = requests.post(url, params=params)
-    upload_response.raise_for_status()
-    return upload_response.json()
+    response = requests.post(url, params=params)
+    response.raise_for_status()
+    upload_response = response.json()
+    upload_owner_id = upload_response['response'][0]['owner_id']
+    photo_id = upload_response["response"][0]["id"]
+    return upload_owner_id, photo_id
 
 
-def publish_comic(response, token, group_id, comment):
+def publish_comic(upload_owner_id, photo_id, token, group_id, comment):
     url = "https://api.vk.com/method/wall.post"
-    owner_id = f"-{group_id}"
-    photo_id = response["response"][0]["id"]
-    attachments = f"photo{response['response'][0]['owner_id']}_{photo_id}"
+    group_id = f"-{group_id}"
+    attachments = f"photo{upload_owner_id}_{photo_id}"
     params = {
         "v": "5.131",
         "access_token": token,
-        "owner_id": owner_id,
+        "owner_id": group_id,
         "from_group": 1,
         "message": comment,
         "attachments": attachments,
