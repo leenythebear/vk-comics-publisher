@@ -30,6 +30,7 @@ if __name__ == "__main__":
             photo,
             photo_hash,
             token,
+            group_id,
         )
         publish_comic(upload_owner_id, photo_id, token, group_id, comic_comment)
     finally:

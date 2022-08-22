@@ -21,12 +21,12 @@ def upload_comic_to_server(filename, url_for_upload):
     return photo_server, photo, photo_hash
 
 
-def upload_comic_in_album(photo_server, photo, photo_hash, token):
+def upload_comic_in_album(photo_server, photo, photo_hash, token, group_id):
     url = "https://api.vk.com/method/photos.saveWallPhoto"
     params = {
         "v": "5.131",
         "access_token": token,
-        "group_id": "215364307",
+        "group_id": group_id,
         "server": photo_server,
         "photo": photo,
         "hash": photo_hash,
